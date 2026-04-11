@@ -3,18 +3,10 @@
 Este repositório contém uma **Collection do Postman** para praticar testes de API com CRUD completo e testes negativos usando a API pública **JSONPlaceholder**.
 
 **A Collection possui:**
-- **CRUD completo**: Create (POST), Read (GET), Update (PUT), Delete (DELETE)  
-- **Testes positivos**: validação de status code e campos retornados  
-- **Testes negativos**: validação de erros e comportamentos inesperados  
-- **Environment configurável**: para URL base e IDs de usuário  
-
-**Estrutura do repositório**
-testes-cadastro-api/
-├─ collections/
-│ └─ TesteCadastroApi.json #Collection Postman com todos os testes
-├─ environments/
-│ └─ CadastroMaster.postman_environment.json #Environment com variáveis baseUrl e userId
-└─ README.md
+- **CRUD completo**: Create (POST), Read (GET), Update (PUT), Delete (DELETE).
+- **Testes positivos**: validação de status code e campos retornados.  
+- **Testes negativos**: validação de erros e comportamentos inesperados.  
+- **Environment configurável**: para URL base e IDs de usuário.
 
 **Variáveis do Environment**
 | baseUrl  | https://jsonplaceholder.typicode.com  | URL base da API                 |
