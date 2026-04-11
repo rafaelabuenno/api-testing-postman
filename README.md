@@ -2,7 +2,7 @@
 
 Este repositório contém uma **Collection do Postman** para praticar testes de API com CRUD completo e testes negativos usando a API pública **JSONPlaceholder**.
 
-**A Collection inclui:**
+**A Collection possui:**
 - **CRUD completo**: Create (POST), Read (GET), Update (PUT), Delete (DELETE)  
 - **Testes positivos**: validação de status code e campos retornados  
 - **Testes negativos**: validação de erros e comportamentos inesperados  
