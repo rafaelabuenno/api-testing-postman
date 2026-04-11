@@ -8,10 +8,6 @@ Este repositório contém uma **Collection do Postman** para praticar testes de 
 - **Testes negativos**: validação de erros e comportamentos inesperados.  
 - **Environment configurável**: para URL base e IDs de usuário.
 
-**Variáveis do Environment**
-| baseUrl  | https://jsonplaceholder.typicode.com  | URL base da API                 |
-| userId   | 1                                     | ID do usuário para PUT/DELETE   |
-
 **Ordem recomendada de execução dos testes**
 **Testes Positivos (CRUD)**
 1. **Criar Usuário (POST)** – valida criação e campos retornados.  
