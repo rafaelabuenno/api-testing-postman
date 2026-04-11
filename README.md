@@ -19,7 +19,7 @@ Este repositório contém uma **Collection do Postman** para praticar testes de 
 
 **Testes Negativos**
 1. **Usuário Sem Dados (POST)** : testa resposta da API quando o body está vazio.  
-2. **Buscar usuário inexistente (GET)** : verifica comportamento ao buscar ID inexistente.  
-3. **Atualizar com dados inválidos (PUT)** : testa se a API rejeita dados incorretos (em JSONPlaceholder, aceita qualquer dado).
+2. **Buscar Usuário Inexistente (GET)** : verifica comportamento ao buscar ID inexistente.  
+3. **Atualizar Dados Inválidos (PUT)** : testa se a API rejeita dados incorretos (em JSONPlaceholder, aceita qualquer dado).
 
 
