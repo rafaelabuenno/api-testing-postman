@@ -5,7 +5,7 @@ Este repositório tem 2 exemplos de testes de API para **cadastro de usuários**
 2. **Teste robusto**: versão avançada, com validações de campos, status code, e testes negativos.
 
 
-**1- Teste simples**
+**1-Teste simples**
 **Testes positivos**
   * Criar Usuário (POST)
   * Listar Usuários (GET)
@@ -17,7 +17,7 @@ Este repositório tem 2 exemplos de testes de API para **cadastro de usuários**
     * Criar usuário sem body
     * Atualizar com dados inválidos
 
-**2- Teste robusto**
+**2-Teste robusto**
 **Testes positivos**
   * CRUD completo com validação detalhada dos campos
   * Valida formato de e-mail e existência de ID
