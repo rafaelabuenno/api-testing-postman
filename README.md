@@ -55,6 +55,7 @@ JSONPlaceholder é apenas uma API de teste, então alguns comportamentos podem n
  <br>
  
 **Link Postan:**
+ <br>
 Simples: https://qa-estudos.postman.co/workspace/c5ae6209-e786-42a9-90db-4d724c38e957/collection/24046725-39a6c7a0-9ff1-4f13-9431-7a5f341d1dd3?action=share&source=copy-link&creator=24046725
  <br>
 Robusta: https://qa-estudos.postman.co/workspace/c5ae6209-e786-42a9-90db-4d724c38e957/collection/24046725-8bdf3dc8-777b-4e60-aed1-3380aacabafd?action=share&source=copy-link&creator=24046725
