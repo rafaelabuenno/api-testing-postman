@@ -9,10 +9,10 @@ Este repositório tem 2 exemplos de testes de API para **cadastro de usuários**
 1.**Teste simples** 
 
 **Testes positivos:**
-  * Cria usuário (POST)
-  * Lista usuários (GET)
-  * Atualiza usuário (PUT)
-  * Deleta usuário (DELETE)
+  * Cria usuário (POST).
+  * Lista usuários (GET).
+  * Atualiza usuário (PUT).
+  * Deleta usuário (DELETE).
 
 **Testes negativos:**
 * Busca usuário inexistente
