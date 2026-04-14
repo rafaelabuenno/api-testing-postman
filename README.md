@@ -35,7 +35,6 @@ Este repositório tem 2 exemplos de testes de API para **cadastro de usuários**
  <br>
  
 **Ordem recomendada para os testes**
- <br>
 
 **Teste positivo (CRUD)**
 1. Criar Usuário (POST)
@@ -47,12 +46,14 @@ Este repositório tem 2 exemplos de testes de API para **cadastro de usuários**
 1. Criar usuário sem body (POST)
 2. Buscar usuário inexistente (GET espera 404)
 3. Atualizar com dados inválidos (PUT valida status)
-
+ <br>
+ <br>
+ 
 **Detalhes dos testes**
 * **Teste Simples:** valida apenas status code e presença de dados.
 * **Teste Robusto:** valida status code, campos do usuário, formato de e-mail, ID retornado, e inclui tratamento de respostas negativas.
  <br>
  <br>
-**Observações**
+ **Observações**
 JSONPlaceholder é **apenas uma API de teste**, então alguns comportamentos podem não refletir APIs reais (ex.: criar usuário retorna sempre um ID simulado).
 
