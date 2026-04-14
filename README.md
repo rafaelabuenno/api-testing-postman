@@ -3,11 +3,10 @@
 Este repositório tem 2 exemplos de testes de API para **cadastro de usuários**, usando **Postman**:
 1. **Teste simples**: validações básicas de CRUD.
 2. **Teste robusto**: versão avançada, com validações de campos, status code, e testes negativos.
-
+<br>
+<br>
 
 1.**Teste simples** 
-<br>
-<br>
 
 **Testes positivos:**
   * Criar Usuário (POST)
@@ -19,8 +18,8 @@ Este repositório tem 2 exemplos de testes de API para **cadastro de usuários**
     * Buscar usuário inexistente
     * Criar usuário sem body
     * Atualizar com dados inválidos
-
-    
+ <br>
+ <br>
 2.**Teste robusto**
 
 **Testes positivos:**
