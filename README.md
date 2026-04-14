@@ -55,6 +55,6 @@ Este repositório tem 2 exemplos de testes de API para **cadastro de usuários**
  <br>
  <br>
 
-**_Observaçõe_**
+**_Observação:_**
 JSONPlaceholder é apenas uma API de teste, então alguns comportamentos podem não refletir APIs reais (ex.: criar usuário retorna sempre um ID simulado).
 
