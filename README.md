@@ -1,7 +1,6 @@
 **Cadastro de usuários - Testes API**
 
-Este repositório contém exemplos de testes de API para **cadastro de usuários**, usando **Postman**. Ele possui duas versões:
-
+Este repositório tem 2 exemplos de testes de API para **cadastro de usuários**, usando **Postman**:
 1. **Teste simples**: validações básicas de CRUD.
 2. **Teste robusto**: versão avançada, com validações de campos, status code, e testes negativos.
 
