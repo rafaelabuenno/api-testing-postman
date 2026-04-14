@@ -1,7 +1,7 @@
 **Cadastro de usuários - Testes API**
 
 Este repositório tem 2 exemplos de testes de API para **cadastro de usuários**, usando **Postman**:
-1. **Teste simples**: validações básicas de CRUD.
+1. **Teste simples** : validações básicas de CRUD.
 2. **Teste robusto**: versão avançada, com validações de campos, status code e testes negativos.
 <br>
 <br>
@@ -51,4 +51,10 @@ Este repositório tem 2 exemplos de testes de API para **cadastro de usuários**
  
 **_Observação:_**
 JSONPlaceholder é apenas uma API de teste, então alguns comportamentos podem não refletir APIs reais (ex.: criar usuário retorna sempre um ID simulado).
+ <br>
+ <br>
+ 
+**Link Postan:**
+Simpples: https://qa-estudos.postman.co/workspace/c5ae6209-e786-42a9-90db-4d724c38e957/collection/24046725-39a6c7a0-9ff1-4f13-9431-7a5f341d1dd3?action=share&source=copy-link&creator=24046725
+Robusta: https://qa-estudos.postman.co/workspace/c5ae6209-e786-42a9-90db-4d724c38e957/collection/24046725-8bdf3dc8-777b-4e60-aed1-3380aacabafd?action=share&source=copy-link&creator=24046725
 
