@@ -9,15 +9,15 @@ Este repositório tem 2 exemplos de testes de API para **cadastro de usuários**
 1.**Teste simples** 
 
 **Testes positivos:**
-  * Criar usuário (POST)
-  * Listar usuários (GET)
-  * Atualizar usuário (PUT)
-  * Deletar usuário (DELETE)
- 
+  * Cria usuário (POST)
+  * Lista usuários (GET)
+  * Atualiza usuário (PUT)
+  * Deleta usuário (DELETE)
+
 **Testes negativos:**
-* Buscar usuário inexistente
-* Criar usuário sem body
-* Atualizar com dados inválidos
+* Busca usuário inexistente
+* Cria usuário sem body
+* Atualiza com dados inválidos
  <br>
  <br>
  
@@ -29,23 +29,23 @@ Este repositório tem 2 exemplos de testes de API para **cadastro de usuários**
 
 **Testes negativos:**
   * Usuário inexistente espera 404
-  * Criar sem body validação de status
-  * Atualizar com dados inválidos validação de status
+  * Cria sem body validação de status
+  * Atualiza com dados inválidos validação de status
  <br>
  <br>
  
 **Ordem recomendada para os testes**
 
 **Teste positivo (CRUD)**
-1. Criar usuário (POST)
-2. Listar usuários (GET)
-3. Atualizar usuário (PUT)
-4. Deletar usuário (DELETE)
+1. Cria usuário (POST)
+2. Lista usuários (GET)
+3. Atualiza usuário (PUT)
+4. Deleta usuário (DELETE)
 
 **Teste negativo**
-1. Criar usuário sem body (POST)
-2. Buscar usuário inexistente (GET espera 404)
-3. Atualizar com dados inválidos (PUT valida status)
+1. Cria usuário sem body (POST)
+2. Busca usuário inexistente (GET espera 404)
+3. Atualiza com dados inválidos (PUT valida status)
  <br>
  <br>
  
