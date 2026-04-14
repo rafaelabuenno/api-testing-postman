@@ -30,9 +30,9 @@ Este repositório tem 2 exemplos de testes de API para **cadastro de usuários**
   * Testes Negativos robustos, incluindo:
 
 **Testes negativos:**
-  * Usuário inexistente → espera 404
-  * Criar sem body → validação de status
-  * Atualizar com dados inválidos → validação de status
+  * Usuário inexistente espera 404
+  * Criar sem body validação de status
+  * Atualizar com dados inválidos validação de status
 
 **Ordem recomendada para os testes**
 
