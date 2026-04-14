@@ -1,0 +1,334 @@
+{
+  "info": {
+    "_postman_id": "39a6c7a0-9ff1-4f13-9431-7a5f341d1dd3",
+    "name": "Testes de API - Simples",
+    "description": "> Collection para praticar testes de API com CRUD completo (Create, Read, Update, Delete) e testes negativos.  \nInclui validações de status code, campos retornados e comportamentos de erro em endpoints da API JSONPlaceholder.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24046725",
+    "_collection_link": "https://go.postman.co/collection/24046725-39a6c7a0-9ff1-4f13-9431-7a5f341d1dd3?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Testes Positivo",
+      "item": [
+        {
+          "name": "Criar Usuário",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verifica se a criação do usuário retornou status code 201\r",
+                  "pm.test(\"Status code é 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "// Verifica se os campos do usuário criado estão corretos\r",
+                  "pm.test(\"Usuário criado contém os dados corretos\", function () {\r",
+                  "    const jsonData = pm.response.json(); // Converte a resposta JSON em objeto JS\r",
+                  "\r",
+                  "    const expectedName = \"Rafaela QA\"; // Nome esperado\r",
+                  "    const expectedUsername = \"rafaqa\"; // Username esperado\r",
+                  "    const expectedEmail = \"rafaela@example.com\"; // Email esperado\r",
+                  "\r",
+                  "    pm.expect(jsonData.name).to.eql(expectedName); // Verifica o nome\r",
+                  "    pm.expect(jsonData.username).to.eql(expectedUsername); // Verifica o username\r",
+                  "    pm.expect(jsonData.email).to.eql(expectedEmail); // Verifica o email\r",
+                  "    pm.expect(jsonData).to.have.property(\"id\"); // Confirma que a API retornou um ID\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Rafaela QA\",\r\n  \"username\": \"rafaqa\",\r\n  \"email\": \"rafaela@example.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Todos Usuário",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verifica se a requisição GET retornou status code 200\r",
+                  "pm.test(\"Status code é 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "// Verifica se a resposta da API é um array (lista de usuários)\r",
+                  "pm.test(\"Retorna lista de usuários\", function () {\r",
+                  "    const jsonData = pm.response.json(); // Converte a resposta JSON em objeto JS\r",
+                  "    pm.expect(jsonData).to.be.an(\"array\"); // Confirma que a resposta é um array\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Usuário",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verifica se a requisição retornou status code 200 (sucesso)\r",
+                  "pm.test(\"Status code é 200\", function () {\r",
+                  "    const statusCode = pm.response.code; // Pega o status code da resposta\r",
+                  "    pm.expect(statusCode).to.eql(200);   // Espera que seja 200\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Rafaela QA Atualizada\",\r\n  \"username\": \"rafaqa\",\r\n  \"email\": \"rafaela.updated@example.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "{{userId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Deletar Usuário",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verifica se a exclusão do usuário retornou status code 200\r",
+                  "pm.test(\"Status code é 200 - Usuário deletado\", function () {\r",
+                  "    const statusCode = pm.response.code; // Captura o status code da resposta\r",
+                  "    pm.expect(statusCode).to.eql(200);   // Espera que seja 200 \r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "{{userId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "**Contém testes que verificam como a API reage a requisições inválidas ou incompletas. Inclui:**\n\n- Criar usuário sem enviar body (POST)\n    \n- Buscar usuário inexistente (GET)\n    \n- Atualizar usuário com dados inválidos (PUT)\n    \n\nEsses testes ajudam a validar a robustez e tratamento de erros da API."
+    },
+    {
+      "name": "Testes Negativo",
+      "item": [
+        {
+          "name": "Usuário Sem Dados",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verifica que não é possível criar um usuário sem enviar body\r",
+                  "pm.test(\"Status code não é 201\", function () {\r",
+                  "    const statusCode = pm.response.code; // Captura o status code da resposta\r",
+                  "    pm.expect(statusCode).to.not.equal(201); // Espera que a criação não ocorra\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Usuário Inexistente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verifica se a API retorna vazio ao buscar um usuário inexistente\r",
+                  "pm.test(\"Usuário inexistente retorna vazio\", function () {\r",
+                  "    const jsonData = pm.response.json(); // Converte a resposta JSON em objeto JS\r",
+                  "    pm.expect(jsonData).to.be.empty;     // Espera que não exista nenhum dado para o ID inexistente\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Dados Inválidos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verifica se a API rejeita dados inválidos ao atualizar um usuário\r",
+                  "pm.test(\"Status code é 200 mas dados inválidos não deveriam ser aceitos\", function () {\r",
+                  "    const statusCode = pm.response.code; // Captura o status code da resposta\r",
+                  "    pm.expect(statusCode).to.eql(200);   // JSONPlaceholder retorna 200, mas em APIs reais seria 400\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": 12345\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "{{userId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "**Contém todos os testes que verificam o comportamento esperado da API. Inclui:**\n\n- Criar usuário com dados válidos (POST)\n    \n- Listar usuários (GET)\n    \n- Atualizar usuário (PUT)\n    \n- Deletar usuário (DELETE)\n    \n\nTodos os testes verificam status code correto e campos retornados."
+    }
+  ]
+}
