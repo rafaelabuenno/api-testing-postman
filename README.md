@@ -5,7 +5,6 @@ Este repositório tem 2 exemplos de testes de API para **cadastro de usuários**
 2. **Teste robusto**: versão avançada, com validações de campos, status code, e testes negativos.
 <br>
 <br>
-
 1.**Teste simples** 
 
 **Testes positivos:**
