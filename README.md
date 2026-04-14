@@ -54,6 +54,6 @@ Este repositório tem 2 exemplos de testes de API para **cadastro de usuários**
 * **Teste Robusto:** valida status code, campos do usuário, formato de e-mail, ID retornado, e inclui tratamento de respostas negativas.
  <br>
  <br>
- **Observações**
-JSONPlaceholder é **apenas uma API de teste**, então alguns comportamentos podem não refletir APIs reais (ex.: criar usuário retorna sempre um ID simulado).
+**Observações**
+JSONPlaceholder é apenas uma API de teste, então alguns comportamentos podem não refletir APIs reais (ex.: criar usuário retorna sempre um ID simulado).
 
