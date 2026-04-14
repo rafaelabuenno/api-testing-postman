@@ -26,7 +26,6 @@ Este repositório tem 2 exemplos de testes de API para **cadastro de usuários**
 **Testes positivos:**
   * CRUD completo com validação detalhada dos campos
   * Valida formato de e-mail e existência de ID
-  * Testes Negativos robustos, incluindo:
 
 **Testes negativos:**
   * Usuário inexistente espera 404
