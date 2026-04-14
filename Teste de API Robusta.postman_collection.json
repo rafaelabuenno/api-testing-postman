@@ -1,0 +1,375 @@
+{
+  "info": {
+    "_postman_id": "8bdf3dc8-777b-4e60-aed1-3380aacabafd",
+    "name": "Teste de API - Robusta",
+    "description": "Collection do Postman para praticar testes de API com **CRUD completo** e **testes negativos**, utilizando a API pública **JSONPlaceholder**.\n\nInclui:\n\n- **Testes Positivos (CRUD):** validação de criação (POST), listagem (GET), atualização (PUT) e remoção (DELETE) de usuários.\n    \n- **Testes Negativos:** valida cenários de erro, como criar usuário sem body, buscar usuário inexistente e atualizar com dados inválidos.\n    \n- **Validações robustas:** checagem de status code, campos retornados e formato de dados (ex: email).\n    \n- **Environment configurável:** permite alterar facilmente `baseUrl` e `userId` sem modificar cada request.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24046725",
+    "_collection_link": "https://go.postman.co/collection/24046725-8bdf3dc8-777b-4e60-aed1-3380aacabafd?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Testes Positivo",
+      "item": [
+        {
+          "name": "Criar Usuário",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verifica se a criação do usuário retornou status code 201\r",
+                  "pm.test(\"Status code é 201 - Usuário criado\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "// Verifica se os campos do usuário criado estão corretos\r",
+                  "pm.test(\"Campos do usuário criados corretamente\", function () {\r",
+                  "    const jsonData = pm.response.json(); // Converte a resposta JSON em objeto JS\r",
+                  "    const userName = pm.variables.get(\"userName\"); // Nome esperado do Environment\r",
+                  "    const userLogin = pm.variables.get(\"userLogin\"); // Username esperado do Environment\r",
+                  "    const userEmail = pm.variables.get(\"userEmail\"); // Email esperado do Environment\r",
+                  "\r",
+                  "    pm.expect(jsonData.name).to.eql(userName); // Verifica o nome\r",
+                  "    pm.expect(jsonData.username).to.eql(userLogin); // Verifica o username\r",
+                  "    pm.expect(jsonData.email).to.eql(userEmail); // Verifica o email\r",
+                  "    pm.expect(jsonData).to.have.property(\"id\"); // Confirma que a API retornou um ID\r",
+                  "});\r",
+                  "\r",
+                  "// Valida se o email retornado está no formato correto\r",
+                  "pm.test(\"Email está no formato correto\", function () {\r",
+                  "    const jsonData = pm.response.json(); // Converte a resposta JSON em objeto JS //\r",
+                  "    const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/; // Expressão regular para validar email //\r",
+                  "    pm.expect(emailRegex.test(jsonData.email)).to.be.true; // Teste passa se o email estiver no formato correto //\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"{{userName}}\",\r\n  \"username\": \"{{userLogin}}\",\r\n  \"email\": \"{{userEmail}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Listar Usuários",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verifica se o status code da requisição GET é 200\r",
+                  "pm.test(\"Status code é 200 - Lista retornada\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "// Verifica se a resposta da API é um array (esperado para quando tem lista de usuários)\r",
+                  "pm.test(\"Resposta contém array de usuários\", function () {\r",
+                  "    const jsonData = pm.response.json(); // Converte a resposta JSON em objeto JS\r",
+                  "    pm.expect(jsonData).to.be.an(\"array\"); // Confirma que é um array\r",
+                  "});\r",
+                  "\r",
+                  "// Verifica se o usuário criado anteriormente aparece na lista\r",
+                  "pm.test(\"Usuário criado aparece na lista\", function () {\r",
+                  "    const jsonData = pm.response.json(); // Converte a resposta JSON em objeto JS\r",
+                  "    const userName = pm.variables.get(\"userName\"); // Pega o nome do usuário do Environment\r",
+                  "    const exists = jsonData.some(user => user.name === userName); // Verifica se algum usuário na lista tem o mesmo nome\r",
+                  "    pm.expect(exists).to.be.true; // Teste passa se o usuário existir na lista\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Usuário",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verifica se a atualização do usuário retornou status code 200\r",
+                  "pm.test(\"Status code é 200 - Usuário atualizado\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "// Verifica se os campos do usuário foram atualizados corretamente\r",
+                  "pm.test(\"Campos atualizados corretamente\", function () {\r",
+                  "    const jsonData = pm.response.json(); // Converte a resposta JSON em objeto JS\r",
+                  "    const expectedName = pm.variables.get(\"userNameUpdated\"); // Nome atualizado esperado do Environment\r",
+                  "    const expectedEmail = pm.variables.get(\"userEmailUpdated\"); // Email atualizado esperado do Environment\r",
+                  "\r",
+                  "    pm.expect(jsonData.name).to.eql(expectedName); // Verifica se o nome foi atualizado corretamente\r",
+                  "    pm.expect(jsonData.email).to.eql(expectedEmail); // Verifica se o email foi atualizado corretamente\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"{{userNameUpdated}}\",\r\n  \"username\": \"{{userLogin}}\",\r\n  \"email\": \"{{userEmailUpdated}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "{{userId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Deletar Cadastro",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verifica se a exclusão do usuário retornou status code 200\r",
+                  "pm.test(\"Status code é 200 - Usuário deletado\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "//  Verifica que o usuário não existe mais\r",
+                  "pm.test(\"Usuário não existe mais\", function () {\r",
+                  "    const userId = pm.variables.get(\"userId\"); // Pega o ID do usuário do Environment\r",
+                  "    const baseUrl = pm.variables.get(\"baseUrl\"); // Pega a URL base do Environment\r",
+                  "\r",
+                  "    pm.sendRequest({\r",
+                  "        url: `${baseUrl}/users/${userId}`, // Monta a URL para verificar se o usuário ainda existe\r",
+                  "        method: \"GET\"\r",
+                  "    }, function(err, res) {\r",
+                  "        // JSONPlaceholder retorna 200 mesmo se não existir, mas em APIs reais seria 404\r",
+                  "        pm.expect(res.code).to.be.oneOf([404, 200]);\r",
+                  "\r",
+                  "        const jsonData = res.json(); // Converte a resposta em objeto JS\r",
+                  "        pm.expect(jsonData).to.be.empty; // Espera que o usuário não exista mais\r",
+                  "    });\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "{{userId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Esta pasta contém todos os testes que verificam o comportamento esperado da API, incluindo o fluxo completo de CRUD:\n\n- **POST (Criar usuário):** valida status code, campos retornados e formato de email.\n    \n- **GET (Listar usuários):** verifica se a lista é retornada corretamente e se o usuário criado aparece.\n    \n- **PUT (Atualizar usuário):** valida a atualização dos campos.\n    \n- **DELETE (Remover usuário):** verifica que o usuário é deletado com sucesso."
+    },
+    {
+      "name": "Testes Negativo",
+      "item": [
+        {
+          "name": "Cadastro Sem Dados",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verifica que não é possível criar um usuário sem enviar body\r",
+                  "pm.test(\"Não deve criar usuário sem body\", function () {\r",
+                  "    const statusCode = pm.response.code; // Pega o status code da resposta\r",
+                  "    pm.expect(statusCode).to.not.equal(201); // Espera que o status code não seja 201 (criação não deve ocorrer)\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Usuário Inexistente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Usuário inexistente retorna 404\r",
+                  "pm.test(\"Usuário inexistente retorna 404\", function () {\r",
+                  "    const statusCode = pm.response.code; // Captura o status code\r",
+                  "    pm.expect(statusCode).to.eql(404);   // Espera 404 teste passa\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/9999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "9999"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Dados Inválidos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Verifica se a API não aceita dados inválidos ao atualizar usuário\r",
+                  "pm.test(\"Não aceitar dados inválidos\", function () {\r",
+                  "    const statusCode = pm.response.code; // Pega o status code da resposta\r",
+                  "    pm.expect(statusCode).to.eql(400); // Espera que a API retorne 400 Bad Request para dados inválidos\r",
+                  "    // Observação: JSONPlaceholder não retorna 400, mas em APIs reais seria o comportamento esperado\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": 12345\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "{{userId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Esta pasta contém todos os testes que verificam como a API reage a requisições inválidas ou incompletas:\n\n- **POST sem body:** valida que a criação falha quando não há dados enviados.\n    \n- **GET usuário inexistente:** verifica que a API retorna objeto vazio ou erro ao buscar um ID que não existe.\n    \n- **PUT com dados inválidos:** testa se a API rejeita dados incorretos (em APIs reais retornaria erro 400/422)."
+    }
+  ]
+}
